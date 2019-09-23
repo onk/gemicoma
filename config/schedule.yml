@@ -1,0 +1,4 @@
+fetch_latest_gem_versions_job:
+  cron: "0 3 * * *"
+  class: "FetchLatestGemVersionsJob"
+  description: "sync latest gem versions from rubygems.org"
