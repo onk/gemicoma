@@ -12,4 +12,28 @@
 
 ActiveRecord::Schema.define() do
 
+  create_table "gem_versions", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "version", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name", "version"], name: "name_and_version", unique: true
+  end
+
+  create_table "project_gem_versions", force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.bigint "gem_version_id", null: false
+    t.string "locked_version", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["gem_version_id"], name: "gem_version_id"
+    t.index ["project_id", "gem_version_id"], name: "project_id_and_gem_version_id", unique: true
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
 end
