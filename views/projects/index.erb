@@ -1,0 +1,28 @@
+<table class="table table-sm">
+  <thead class="thead-light">
+    <tr>
+      <th>name</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @projects.each do |project| %>
+      <tr>
+        <td><a href="/projects/<%= project.id %>"><%= project.name %></a></td>
+        <td>
+          <form action="/projects/<%= project.id %>" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <input type="submit" value="destroy">
+          </form>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<form action="/projects" method="POST">
+  <label for="name">name</label>
+  <input type="text" name="name" id="name" placeholder="user_or_org/repo_name" required>
+  <br>
+  <input type="submit" value="Create">
+</form>
