@@ -7,6 +7,7 @@ gem "activerecord"
 gem "activerecord-quiet_schema_version"
 gem "activerecord-simple_index_name"
 gem "mysql2"
+gem "octokit"
 gem "sidekiq"
 gem "sidekiq-cron"
 gem "sinatra", require: false
