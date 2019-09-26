@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define() do
 
-  create_table "gem_versions", force: :cascade do |t|
+  create_table "gem_versions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
     t.string "name", null: false
     t.string "version", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -20,9 +20,9 @@ ActiveRecord::Schema.define() do
     t.index ["name", "version"], name: "name_and_version", unique: true
   end
 
-  create_table "project_gem_versions", force: :cascade do |t|
-    t.bigint "project_id", null: false
-    t.bigint "gem_version_id", null: false
+  create_table "project_gem_versions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.bigint "project_id", null: false, unsigned: true
+    t.bigint "gem_version_id", null: false, unsigned: true
     t.string "locked_version", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define() do
     t.index ["project_id", "gem_version_id"], name: "project_id_and_gem_version_id", unique: true
   end
 
-  create_table "projects", force: :cascade do |t|
+  create_table "projects", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
