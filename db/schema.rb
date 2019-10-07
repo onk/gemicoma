@@ -17,7 +17,7 @@ ActiveRecord::Schema.define() do
     t.string "version", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["name", "version"], name: "name_and_version", unique: true
+    t.index ["name"], name: "name", unique: true
   end
 
   create_table "project_gem_versions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
