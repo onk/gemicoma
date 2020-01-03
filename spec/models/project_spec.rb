@@ -13,7 +13,7 @@ RSpec.describe Project do
     }
 
     context "insert" do
-      specify "upsert gem_version is upserted correctly" do
+      specify "insert project_gem_versions is inserted correctly" do
         subject
 
         expect(GemVersion.count).to eq 3
@@ -40,7 +40,7 @@ RSpec.describe Project do
         @pgv_2 = @project.project_gem_versions.create!(gem_version: @gem_version_2, locked_version: "2.6.0")
       }
 
-      specify "upsert gem_version is upserted correctly" do
+      specify "upsert project_gem_versions is upserted correctly" do
         subject
 
         # project_gem_version's locked_version is updated
