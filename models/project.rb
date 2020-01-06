@@ -1,6 +1,18 @@
 class Project < ActiveRecord::Base
   has_many :project_gem_versions
 
+  def host
+    uri.host
+  end
+
+  def name
+    uri.path.sub(%r{^/}, "")
+  end
+
+  def uri
+    @uri ||= URI.parse(url)
+  end
+
   def import_project_gem_versions(specs)
     db_project_gem_versions_idx = project_gem_versions.preload(:gem_version).
       index_by {|pgv| pgv.gem_version.name }

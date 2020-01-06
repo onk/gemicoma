@@ -1,6 +1,7 @@
 <table class="table table-sm">
   <thead class="thead-light">
     <tr>
+      <th>host</th>
       <th>name</th>
       <th></th>
     </tr>
@@ -8,6 +9,7 @@
   <tbody>
     <% @projects.each do |project| %>
       <tr>
+        <td><%= project.host %></td>
         <td><a href="/projects/<%= project.id %>"><%= project.name %></a></td>
         <td>
           <form action="/projects/<%= project.id %>" method="post">
@@ -22,7 +24,7 @@
 
 <form action="/projects" method="POST">
   <label for="name">name</label>
-  <input type="text" name="name" id="name" placeholder="user_or_org/repo_name" required>
+  <input type="text" name="url" id="url" placeholder="https://github.com/user_or_org/repo_name" required>
   <br>
   <input type="submit" value="Create">
 </form>
