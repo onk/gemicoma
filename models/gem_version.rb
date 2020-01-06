@@ -13,10 +13,17 @@ class GemVersion < ActiveRecord::Base
 
     all_gems_idx = GemVersion.all.index_by(&:name)
 
+    now = Time.current
+    gem_versions = []
     hash.each do |gem_name, latest_version|
       gem_version = all_gems_idx[gem_name] || GemVersion.new(name: gem_name)
       gem_version.version = latest_version.to_s
-      gem_version.save! if gem_version.changed?
+      if gem_version.changed?
+        gem_version.created_at ||= now
+        gem_version.updated_at = now
+        gem_versions << gem_version.attributes
+      end
     end
+    GemVersion.upsert_all(gem_versions)
   end
 end
