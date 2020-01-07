@@ -25,7 +25,15 @@ class FetchProjectGemVersionsJob
   private
 
     def fetch_lockfile(project)
-      client = Octokit::Client.new(access_token: ENV["GITHUB_TOKEN"])
+      client = if project.host == "github.com"
+                 Octokit::Client.new(access_token: ENV["GITHUB_TOKEN"])
+               else
+                 Octokit::Client.new(
+                   access_token: ENV["GHE_TOKEN"], # TODO: configurable for each host
+                   api_endpoint: "https://#{project.host}/api/v3",
+                   web_endpoint: "https://#{project.host}/",
+                 )
+               end
       contents = client.contents(project.name, path: "/Gemfile.lock")
       Base64.decode64(contents.content)
     rescue Octokit::NotFound

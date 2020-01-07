@@ -28,7 +28,7 @@ class App < Sinatra::Base
 
   post "/projects" do
     project_params = {
-      name: params[:name]
+      url: params[:url]
     }
     Project.create!(project_params)
     redirect "/"
