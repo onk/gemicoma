@@ -2,3 +2,7 @@ fetch_latest_gem_versions_job:
   cron: "0 3 * * *"
   class: "FetchLatestGemVersionsJob"
   description: "sync latest gem versions from rubygems.org"
+enqueue_all_project_job:
+  cron: "0 4 * * *"
+  class: "EnqueueAllProjectJob"
+  description: "fetch gem versions of each project"
