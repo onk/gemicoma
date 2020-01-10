@@ -16,6 +16,25 @@ class App < Sinatra::Base
     register Sinatra::Reloader
   end
 
+  helpers do
+    def span(klass: )
+      %Q(<span class="#{klass}"></span>)
+    end
+
+    def status_tag(status)
+      case status
+      when ProjectGemVersion::Status::OUTDATED
+        span(klass: "circle gray") + span(klass: "circle gray") + span(klass: "circle red")
+      when ProjectGemVersion::Status::BEHIND
+        span(klass: "circle gray") + span(klass: "circle yellow") + span(klass: "circle gray")
+      when ProjectGemVersion::Status::LATEST
+        span(klass: "circle green") + span(klass: "circle gray") + span(klass: "circle gray")
+      else
+        nil
+      end
+    end
+  end
+
   get "/" do
     @projects = Project.all
     erb :"projects/index"
