@@ -10,15 +10,15 @@ class ProjectGemVersion < ActiveRecord::Base
   end
 
   def status
-    locked_version  = Gem::Version.new(locked_version)
+    _locked_version  = Gem::Version.new(locked_version)
     current_version = Gem::Version.new(gem_version.version)
 
-    return Status::UNKNOWN unless locked_version && current_version
-    return Status::LATEST if current_version <= locked_version
+    return Status::UNKNOWN unless _locked_version && current_version
+    return Status::LATEST if current_version <= _locked_version
 
     # approximate_recommendation is "~> x.y.z"
     # not satisfied by approximate_recommendation = major version is up = OUTDATED
-    locked_requirement = Gem::Requirement.new(locked_version.approximate_recommendation)
+    locked_requirement = Gem::Requirement.new(_locked_version.approximate_recommendation)
     locked_requirement.satisfied_by?(current_version) ? Status::BEHIND : Status::OUTDATED
   end
 end
