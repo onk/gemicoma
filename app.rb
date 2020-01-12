@@ -41,7 +41,7 @@ class App < Sinatra::Base
   end
 
   get "/projects/:id" do
-    @project = Project.find(params[:id])
+    @project = Project.preload(:project_gem_versions => :gem_version).find(params[:id])
     erb :"projects/show"
   end
 
