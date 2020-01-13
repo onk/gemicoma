@@ -1,4 +1,5 @@
 class Project < ActiveRecord::Base
+  acts_as_paranoid
   has_many :project_gem_versions
 
   def host

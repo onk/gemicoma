@@ -17,6 +17,9 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2)
+    acts_as_paranoid (0.6.2)
+      activerecord (>= 4.2, < 7.0)
+      activesupport (>= 4.2, < 7.0)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
     backports (3.15.0)
@@ -101,6 +104,7 @@ DEPENDENCIES
   activerecord
   activerecord-quiet_schema_version
   activerecord-simple_index_name
+  acts_as_paranoid
   database_rewinder
   mysql2
   octokit

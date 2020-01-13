@@ -6,6 +6,7 @@ git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 gem "activerecord"
 gem "activerecord-quiet_schema_version"
 gem "activerecord-simple_index_name"
+gem "acts_as_paranoid"
 gem "mysql2"
 gem "octokit"
 gem "sidekiq"
