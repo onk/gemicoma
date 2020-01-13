@@ -1,4 +1,9 @@
 class Project < ActiveRecord::Base
+  acts_as_paranoid
+
+  before_destroy :set_is_active_to_null
+  before_recover :set_is_active_to_true
+
   has_many :project_gem_versions
 
   def host
@@ -37,4 +42,17 @@ class Project < ActiveRecord::Base
     end
     ProjectGemVersion.upsert_all(project_gem_versions)
   end
+
+  private
+
+    # is_active becomes null when the project is deleted.
+    # This makes [:url] unique constraint for only active project.
+    def set_is_active_to_null
+      self.update!(is_active: nil)
+    end
+
+    # @see set_is_active_to_null
+    def set_is_active_to_true
+      self.is_active = true
+    end
 end

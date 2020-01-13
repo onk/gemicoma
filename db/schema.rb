@@ -32,8 +32,11 @@ ActiveRecord::Schema.define() do
 
   create_table "projects", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
     t.string "url", null: false
+    t.datetime "deleted_at"
+    t.boolean "is_active", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["url", "is_active"], name: "url_and_is_active", unique: true
   end
 
 end
