@@ -9,8 +9,10 @@ Dir.glob("jobs/**/*").each { |f| require_relative f }
 
 class App < Sinatra::Base
   set :method_override, true # POST _method hack
+  set :sessions, true
   set :database_file, "config/database.yml"
   register Sinatra::ActiveRecordExtension
+  register Sinatra::Flash
 
   configure :development do
     register Sinatra::Reloader
@@ -50,6 +52,9 @@ class App < Sinatra::Base
       url: params[:url]
     }
     Project.create!(project_params)
+    redirect "/"
+  rescue ActiveRecord::RecordNotUnique
+    flash[:alert] = "#{params[:url]} is already exists."
     redirect "/"
   end
 

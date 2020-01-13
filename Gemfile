@@ -14,6 +14,7 @@ gem "sidekiq-cron"
 gem "sinatra", require: false
 gem "sinatra-activerecord"
 gem "sinatra-contrib"
+gem "sinatra-flash", require: ["sinatra/flash"]
 
 group :development do
   gem "rake"
