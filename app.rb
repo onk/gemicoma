@@ -16,6 +16,8 @@ class App < Sinatra::Base
 
   configure :development do
     register Sinatra::Reloader
+    also_reload "models/**/*"
+    also_reload "jobs/**/*"
   end
 
   helpers do
