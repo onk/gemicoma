@@ -43,6 +43,14 @@ class Project < ActiveRecord::Base
     ProjectGemVersion.upsert_all(project_gem_versions)
   end
 
+  def status_percentage
+    @status_percentage ||= begin
+      # ignore UNKNOWN
+      statuses = self.project_gem_versions.map(&:status).select {|s| s != ProjectGemVersion::Status::UNKNOWN }
+      (statuses.count(ProjectGemVersion::Status::LATEST) / statuses.count.to_f * 100).round(3)
+    end
+  end
+
   private
 
     # is_active becomes null when the project is deleted.
