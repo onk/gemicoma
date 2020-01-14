@@ -3,6 +3,7 @@
     <tr>
       <th>host</th>
       <th>name</th>
+      <th>%</th>
       <th></th>
     </tr>
   </thead>
@@ -11,6 +12,7 @@
       <tr>
         <td><%= project.host %></td>
         <td><a href="/projects/<%= project.id %>"><%= project.name %></a></td>
+        <td><%= project.status_percentage %>%</td>
         <td>
           <form action="/projects/<%= project.id %>" method="post">
             <input type="hidden" name="_method" value="delete">

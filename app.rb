@@ -40,7 +40,7 @@ class App < Sinatra::Base
   end
 
   get "/" do
-    @projects = Project.all
+    @projects = Project.preload(:project_gem_versions => :gem_version).all
     erb :"projects/index"
   end
 
