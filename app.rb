@@ -65,4 +65,11 @@ class App < Sinatra::Base
     project.destroy!
     redirect "/"
   end
+
+  post "/projects/:id/sync" do
+    project = Project.find(params[:id])
+    FetchProjectGemVersionsJob.perform_async(project_id: project.id)
+    flash[:notice] = "Sync job was successfully enqueued."
+    redirect "/projects/#{project.id}"
+  end
 end
