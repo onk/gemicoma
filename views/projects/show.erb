@@ -2,6 +2,10 @@
 
 <p>status percentage: <%= @project.status_percentage %>%</p>
 
+<form action="/projects/<%= @project.id %>/sync" method="post" class="mb-3">
+  <input type="submit" value="Sync!">
+</form>
+
 <table class="table table-sm">
   <thead class="thead-light">
     <tr>
