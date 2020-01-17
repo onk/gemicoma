@@ -3,7 +3,7 @@ RSpec.describe Project do
     subject { @project.import_project_gem_versions(@specs) }
 
     before {
-      @project = Project.create!(name: "foo")
+      @project = Project.create!(url: "https://github.com/onk/foo")
 
       @specs = [
         Bundler::LazySpecification.new("activemodel", Gem::Version.create("6.0.2.1"), "ruby"),

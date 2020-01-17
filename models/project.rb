@@ -33,7 +33,7 @@ class Project < ActiveRecord::Base
       unless pgv
         # create: gems not found in rubygems.org
         gem_version = GemVersion.find_or_create_by(name: spec.name) {|gem| gem.version = spec.version.to_s }
-        pgv = self.project_gem_versions.new(gem_version: gem_version)
+        pgv = ProjectGemVersion.new(project: self, gem_version: gem_version)
       end
       pgv.locked_version = spec.version.to_s
       pgv.created_at ||= now
