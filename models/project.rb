@@ -41,6 +41,9 @@ class Project < ActiveRecord::Base
       pgv.attributes
     end
     ProjectGemVersion.upsert_all(project_gem_versions)
+
+    self.last_sync_at = now
+    self.save!
   end
 
   def status_percentage
