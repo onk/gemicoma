@@ -1,3 +1,5 @@
+require "bundler/gem_remote_fetcher"
+
 class FetchLatestGemVersionsJob
   include Sidekiq::Worker
 
