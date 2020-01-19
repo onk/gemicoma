@@ -21,6 +21,10 @@ class App < Sinatra::Base
   end
 
   helpers do
+    def l(object, **kwargs)
+      object.nil? ? "" : I18n.l(object, **kwargs)
+    end
+
     def span(klass: )
       %Q(<span class="#{klass}"></span>)
     end
