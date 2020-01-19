@@ -108,6 +108,7 @@ DEPENDENCIES
   activerecord-simple_index_name
   acts_as_paranoid
   database_rewinder
+  i18n
   mysql2
   octokit
   rake
