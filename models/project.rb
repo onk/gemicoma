@@ -28,7 +28,8 @@ class Project < ActiveRecord::Base
     end
 
     now = Time.current
-    project_gem_versions = specs.map do |spec|
+    project_gem_versions = []
+    specs.each do |spec|
       pgv = db_project_gem_versions_idx[spec.name]
       unless pgv
         # create: gems not found in rubygems.org
@@ -36,11 +37,16 @@ class Project < ActiveRecord::Base
         pgv = ProjectGemVersion.new(project: self, gem_version: gem_version)
       end
       pgv.locked_version = spec.version.to_s
-      pgv.created_at ||= now
-      pgv.updated_at = now
-      pgv.attributes
+      if pgv.changed?
+        pgv.created_at ||= now
+        pgv.updated_at = now
+        project_gem_versions << pgv.attributes
+      end
     end
-    ProjectGemVersion.upsert_all(project_gem_versions)
+    unless project_gem_versions.empty?
+      ProjectGemVersion.upsert_all(project_gem_versions)
+      self.last_gemfile_lock_changed_at = now
+    end
 
     self.last_sync_at = now
     self.save!
