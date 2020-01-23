@@ -1,7 +1,7 @@
 ENV["RACK_ENV"] ||= "test"
 Bundler.require(:default, "test")
 # load sinatra app
-require_relative "../app"
+require_relative "../gemicoma"
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|

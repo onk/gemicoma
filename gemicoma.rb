@@ -7,7 +7,7 @@ Dir.glob("config/initializers/*").each { |f| require_relative f }
 Dir.glob("models/**/*").each { |f| require_relative f }
 Dir.glob("jobs/**/*").each { |f| require_relative f }
 
-class App < Sinatra::Base
+class Gemicoma < Sinatra::Base
   set :method_override, true # POST _method hack
   set :sessions, true
   set :database_file, "config/database.yml"
