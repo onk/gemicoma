@@ -11,7 +11,7 @@
   <tbody>
     <% @projects.each do |project| %>
       <tr>
-        <td><%= project.host %></td>
+        <td><a href="<%= project.url %>"><%= host_image_tag(project.host) %></a></td>
         <td><a href="/projects/<%= project.id %>"><%= project.name %></a></td>
         <td><%= project.status_percentage %>%</td>
         <td><%= l(project.last_gemfile_lock_changed_at) %></td>
