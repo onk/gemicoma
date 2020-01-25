@@ -18,7 +18,8 @@ class Project < ActiveRecord::Base
     @uri ||= URI.parse(url)
   end
 
-  def import_project_gem_versions(specs)
+  def import_project_gem_versions(dependencies, specs)
+    dependencies_idx = dependencies.index_by(&:name)
     db_project_gem_versions_idx = project_gem_versions.preload(:gem_version).
       index_by {|pgv| pgv.gem_version.name }
 
@@ -37,6 +38,9 @@ class Project < ActiveRecord::Base
         pgv = ProjectGemVersion.new(project: self, gem_version: gem_version)
       end
       pgv.locked_version = spec.version.to_s
+      if dependencies_idx[spec.name]
+        pgv.specified_version = dependencies_idx[spec.name].requirement.to_s
+      end
       if pgv.changed?
         pgv.created_at ||= now
         pgv.updated_at = now

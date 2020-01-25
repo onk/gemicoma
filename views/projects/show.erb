@@ -12,6 +12,7 @@
     <tr>
       <th>name</th>
       <th>locked_version</th>
+      <th>specified_version</th>
       <th>current_version</th>
       <th></th>
     </tr>
@@ -29,6 +30,7 @@
       <tr class="<%= row_class_name %>">
         <td><a href="/gem_versions/<%= pg.gem_version.name %>"><%= pg.gem_version.name %></a></td>
         <td><%= pg.locked_version %></td>
+        <td><%= pg.specified_version %></td>
         <td><%= pg.gem_version.version %></td>
         <td>
           <%= status_tag(pg.status) %>
