@@ -1,10 +1,13 @@
 RSpec.describe Project do
   describe "#import_project_gem_versions" do
-    subject { @project.import_project_gem_versions(@specs) }
+    subject { @project.import_project_gem_versions(@dependencies, @specs) }
 
     before {
       @project = Project.create!(url: "https://github.com/onk/foo")
 
+      @dependencies = [
+        Bundler::Dependency.new("activerecord", ">= 0"),
+      ]
       @specs = [
         Bundler::LazySpecification.new("activemodel", Gem::Version.create("6.0.2.1"), "ruby"),
         Bundler::LazySpecification.new("activerecord", Gem::Version.create("6.0.2.1"), "ruby"),
@@ -28,6 +31,12 @@ RSpec.describe Project do
         pgv_2 = @project.project_gem_versions.find_by(gem_version_id: gem_version_2.id)
         expect(gem_version_2.version).to eq "2.7.0"
         expect(pgv_2.locked_version).to eq "2.7.0"
+
+        gem_version_3 = GemVersion.find_by(name: "activerecord")
+        pgv_3 = @project.project_gem_versions.find_by(gem_version_id: gem_version_3.id)
+        expect(gem_version_3.version).to eq "6.0.2.1"
+        expect(pgv_3.locked_version).to eq "6.0.2.1"
+        expect(pgv_3.specified_version).to eq ">= 0"
       end
     end
 
