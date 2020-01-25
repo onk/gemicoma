@@ -52,7 +52,14 @@ class Gemicoma < Sinatra::Base
   end
 
   get "/" do
-    @projects = Project.preload(:project_gem_versions => :gem_version).all
+    @projects = Project.preload(:project_gem_versions => :gem_version).all.sort_by {|proj|
+      [
+        # percent desc, last_changed_at desc, name asc
+        proj.status_percentage.nan? ? 1 : -proj.status_percentage,
+        proj.last_gemfile_lock_changed_at ? -proj.last_gemfile_lock_changed_at.to_f : 1,
+        proj.name,
+      ]
+    }
     erb :"projects/index"
   end
 
