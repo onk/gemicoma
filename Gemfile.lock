@@ -23,6 +23,9 @@ GEM
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
     backports (3.15.0)
+    bundler-audit (0.6.1)
+      bundler (>= 1.2.0, < 3)
+      thor (~> 0.18)
     concurrent-ruby (1.1.5)
     connection_pool (2.2.2)
     database_rewinder (0.9.2)
@@ -95,6 +98,7 @@ GEM
       tilt (~> 2.0)
     sinatra-flash (0.3.0)
       sinatra (>= 1.0.0)
+    thor (0.20.3)
     thread_safe (0.3.6)
     tilt (2.0.10)
     tzinfo (1.2.6)
@@ -109,6 +113,7 @@ DEPENDENCIES
   activerecord-quiet_schema_version
   activerecord-simple_index_name
   acts_as_paranoid
+  bundler-audit
   database_rewinder
   gemnasium-parser
   i18n

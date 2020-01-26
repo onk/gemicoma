@@ -6,3 +6,7 @@ enqueue_all_project_job:
   cron: "0 4 * * *"
   class: "EnqueueAllProjectJob"
   description: "fetch gem versions of each project"
+fetch_ruby_advisory_db_job:
+  cron: "3 3 * * *"
+  class: "FetchRubyAdvisoryDbJob"
+  description: "sync database of vulnerable from ruby-advisory-db"

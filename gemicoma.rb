@@ -25,6 +25,23 @@ class Gemicoma < Sinatra::Base
       object.nil? ? "" : I18n.l(object, **kwargs)
     end
 
+    def advisory_tag(advisory)
+      advisory_id = if advisory.cve
+                      advisory.cve_id
+                    elsif advisory.osvdb
+                      advisory.osvdb_id
+                    # TODO: bundler-audit pull/217
+                    # elsif advisory.ghsa
+                    #   advisory.ghsa_id
+                    end
+      title = if advisory_id
+                "#{advisory_id}: #{advisory.title}"
+              else
+                advisory.title
+              end
+      %Q(<a href="#{advisory.url}" data-toggle="tooltip" title="#{CGI.escapeHTML(title)}"><svg class="octicon octicon-alert" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 000 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 00.01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></a>)
+    end
+
     def span(klass: )
       %Q(<span class="#{klass}"></span>)
     end
