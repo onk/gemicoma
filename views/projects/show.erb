@@ -14,7 +14,8 @@
       <th>locked_version</th>
       <th>specified_version</th>
       <th>current_version</th>
-      <th></th>
+      <th>status</th>
+      <th>vulnerable</th>
     </tr>
   </thead>
   <tbody>
@@ -34,6 +35,13 @@
         <td><%= pg.gem_version.version %></td>
         <td>
           <%= status_tag(pg.status) %>
+        </td>
+        <td>
+          <% if pg.advisories.any? %>
+            <% pg.advisories.each do |advisory| %>
+              <%= advisory_tag(advisory) %>
+            <% end %>
+          <% end %>
         </td>
       </tr>
     <% end %>
