@@ -45,13 +45,13 @@ class FetchProjectGemVersionsJob
     end
 
     def octokit_client(project)
-      if project.host == "github.com"
+      if project.site == "github.com"
         Octokit::Client.new(access_token: ENV["GITHUB_TOKEN"])
       else
         Octokit::Client.new(
-          access_token: ENV["GHE_TOKEN"], # TODO: configurable for each host
-          api_endpoint: "https://#{project.host}/api/v3",
-          web_endpoint: "https://#{project.host}/",
+          access_token: ENV["GHE_TOKEN"], # TODO: configurable for each site
+          api_endpoint: "https://#{project.site}/api/v3",
+          web_endpoint: "https://#{project.site}/",
         )
       end
     end

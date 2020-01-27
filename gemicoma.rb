@@ -59,11 +59,11 @@ class Gemicoma < Sinatra::Base
       end
     end
 
-    def host_image_tag(host)
-      if File.exists?(File.join(settings.public_folder, "#{host}.png"))
-        %Q(<img src="/#{host}.png" width="32" height="32">)
+    def site_image_tag(site)
+      if File.exists?(File.join(settings.public_folder, "#{site}.png"))
+        %Q(<img src="/#{site}.png" width="32" height="32">)
       else
-        host
+        site
       end
     end
   end
