@@ -1,4 +1,4 @@
-<h1><a href="<%= @project.url %>"><%= host_image_tag(@project.host) %></a> <%= @project.name %></h1>
+<h1><a href="<%= @project.url %>"><%= host_image_tag(@project.host) %></a> <%= @project.full_name %></h1>
 
 <p>status percentage: <%= @project.status_percentage %>%</p>
 <p>Last changed at: <%= l(@project.last_gemfile_lock_changed_at) %></p>

@@ -74,7 +74,7 @@ class Gemicoma < Sinatra::Base
         # percent desc, last_changed_at desc, name asc
         proj.status_percentage.nan? ? 1 : -proj.status_percentage,
         proj.last_gemfile_lock_changed_at ? -proj.last_gemfile_lock_changed_at.to_f : 1,
-        proj.name,
+        proj.full_name,
       ]
     }
     erb :"projects/index"

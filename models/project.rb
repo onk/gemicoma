@@ -10,7 +10,7 @@ class Project < ActiveRecord::Base
     uri.host
   end
 
-  def name
+  def full_name
     uri.path.sub(%r{^/}, "")
   end
 
