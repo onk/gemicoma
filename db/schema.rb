@@ -34,13 +34,14 @@ ActiveRecord::Schema.define() do
   create_table "projects", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
     t.string "site", null: false
     t.string "full_name", null: false
+    t.string "path", default: "", null: false
     t.datetime "last_sync_at"
     t.datetime "last_gemfile_lock_changed_at"
     t.datetime "deleted_at"
     t.boolean "is_active", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["site", "full_name", "is_active"], name: "site_and_full_name_and_is_active", unique: true
+    t.index ["site", "full_name", "path", "is_active"], name: "site_and_full_name_and_path_and_is_active", unique: true
   end
 
 end

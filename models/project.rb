@@ -7,7 +7,12 @@ class Project < ActiveRecord::Base
   has_many :project_gem_versions
 
   def url
-    "https://#{site}/#{full_name}"
+    u = "https://#{site}/#{full_name}"
+    if path
+      "#{u}/blob/master/#{path}"
+    else
+      u
+    end
   end
 
   def import_project_gem_versions(dependencies, specs)

@@ -90,6 +90,7 @@ class Gemicoma < Sinatra::Base
     project_params = {
       site: uri.host,
       full_name: uri.path.sub(%r{^/}, ""),
+      path: params[:path].sub(%r{^/}, "").sub(%r{/$}, "")
     }
     Project.create!(project_params)
     redirect "/"

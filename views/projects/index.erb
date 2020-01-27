@@ -12,7 +12,9 @@
     <% @projects.each do |project| %>
       <tr>
         <td><a href="<%= project.url %>"><%= site_image_tag(project.site) %></a></td>
-        <td><a href="/projects/<%= project.id %>"><%= project.full_name %></a></td>
+        <td>
+          <a href="/projects/<%= project.id %>"><%= project.full_name %> <%= project.path %></a>
+        </td>
         <td><%= project.status_percentage %>%</td>
         <td><%= l(project.last_gemfile_lock_changed_at) %></td>
         <td>
@@ -29,6 +31,8 @@
 <form action="/projects" method="POST">
   <label for="name">name</label>
   <input type="text" name="url" id="url" placeholder="https://github.com/user_or_org/repo_name" required>
+  <label for="path">path</label>
+  <input type="text" name="path" id="path" placeholder="/" required>
   <br>
   <input type="submit" value="Create">
 </form>
