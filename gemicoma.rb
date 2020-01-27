@@ -86,8 +86,10 @@ class Gemicoma < Sinatra::Base
   end
 
   post "/projects" do
+    uri = URI.parse(params[:url])
     project_params = {
-      url: params[:url]
+      site: uri.host,
+      full_name: uri.path.sub(%r{^/}, ""),
     }
     Project.create!(project_params)
     redirect "/"
