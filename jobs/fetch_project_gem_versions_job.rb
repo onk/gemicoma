@@ -14,12 +14,12 @@ class FetchProjectGemVersionsJob
     client = octokit_client(project)
     gemfile_body = fetch_gemfile(project, client)
     unless gemfile_body
-      logger.warn "Unable to find Gemfile for #{project.name}"
+      logger.warn "Unable to find Gemfile for #{project.full_name}"
       return
     end
     gemfile_lock_body = fetch_lockfile(project, client)
     unless gemfile_lock_body
-      logger.warn "Unable to find Gemfile.lock for #{project.name}"
+      logger.warn "Unable to find Gemfile.lock for #{project.full_name}"
       return
     end
 
@@ -31,27 +31,27 @@ class FetchProjectGemVersionsJob
   private
 
     def fetch_gemfile(project, client)
-      contents = client.contents(project.name, path: "/Gemfile")
+      contents = client.contents(project.full_name, path: "/Gemfile")
       Base64.decode64(contents.content)
     rescue Octokit::NotFound
       nil
     end
 
     def fetch_lockfile(project, client)
-      contents = client.contents(project.name, path: "/Gemfile.lock")
+      contents = client.contents(project.full_name, path: "/Gemfile.lock")
       Base64.decode64(contents.content)
     rescue Octokit::NotFound
       nil
     end
 
     def octokit_client(project)
-      if project.host == "github.com"
+      if project.site == "github.com"
         Octokit::Client.new(access_token: ENV["GITHUB_TOKEN"])
       else
         Octokit::Client.new(
-          access_token: ENV["GHE_TOKEN"], # TODO: configurable for each host
-          api_endpoint: "https://#{project.host}/api/v3",
-          web_endpoint: "https://#{project.host}/",
+          access_token: ENV["GHE_TOKEN"], # TODO: configurable for each site
+          api_endpoint: "https://#{project.site}/api/v3",
+          web_endpoint: "https://#{project.site}/",
         )
       end
     end

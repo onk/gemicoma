@@ -59,11 +59,11 @@ class Gemicoma < Sinatra::Base
       end
     end
 
-    def host_image_tag(host)
-      if File.exists?(File.join(settings.public_folder, "#{host}.png"))
-        %Q(<img src="/#{host}.png" width="32" height="32">)
+    def site_image_tag(site)
+      if File.exists?(File.join(settings.public_folder, "#{site}.png"))
+        %Q(<img src="/#{site}.png" width="32" height="32">)
       else
-        host
+        site
       end
     end
   end
@@ -74,7 +74,7 @@ class Gemicoma < Sinatra::Base
         # percent desc, last_changed_at desc, name asc
         proj.status_percentage.nan? ? 1 : -proj.status_percentage,
         proj.last_gemfile_lock_changed_at ? -proj.last_gemfile_lock_changed_at.to_f : 1,
-        proj.name,
+        proj.full_name,
       ]
     }
     erb :"projects/index"
@@ -86,8 +86,10 @@ class Gemicoma < Sinatra::Base
   end
 
   post "/projects" do
+    uri = URI.parse(params[:url])
     project_params = {
-      url: params[:url]
+      site: uri.host,
+      full_name: uri.path.sub(%r{^/}, ""),
     }
     Project.create!(project_params)
     redirect "/"

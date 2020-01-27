@@ -6,16 +6,8 @@ class Project < ActiveRecord::Base
 
   has_many :project_gem_versions
 
-  def host
-    uri.host
-  end
-
-  def name
-    uri.path.sub(%r{^/}, "")
-  end
-
-  def uri
-    @uri ||= URI.parse(url)
+  def url
+    "https://#{site}/#{full_name}"
   end
 
   def import_project_gem_versions(dependencies, specs)
@@ -67,7 +59,7 @@ class Project < ActiveRecord::Base
   private
 
     # is_active becomes null when the project is deleted.
-    # This makes [:url] unique constraint for only active project.
+    # This makes [:site, :full_name] unique constraint for only active project.
     def set_is_active_to_null
       self.update!(is_active: nil)
     end

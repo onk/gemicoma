@@ -3,7 +3,7 @@ RSpec.describe Project do
     subject { @project.import_project_gem_versions(@dependencies, @specs) }
 
     before {
-      @project = Project.create!(url: "https://github.com/onk/foo")
+      @project = Project.create!(site: "github.com", full_name: "onk/foo")
 
       @dependencies = [
         Bundler::Dependency.new("activerecord", ">= 0"),
