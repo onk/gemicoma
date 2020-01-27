@@ -31,14 +31,14 @@ class FetchProjectGemVersionsJob
   private
 
     def fetch_gemfile(project, client)
-      contents = client.contents(project.full_name, path: "/Gemfile")
+      contents = client.contents(project.full_name, path: "#{project.path}/Gemfile")
       Base64.decode64(contents.content)
     rescue Octokit::NotFound
       nil
     end
 
     def fetch_lockfile(project, client)
-      contents = client.contents(project.full_name, path: "/Gemfile.lock")
+      contents = client.contents(project.full_name, path: "#{project.path}/Gemfile.lock")
       Base64.decode64(contents.content)
     rescue Octokit::NotFound
       nil
