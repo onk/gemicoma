@@ -8,10 +8,10 @@ class Project < ActiveRecord::Base
 
   def url
     u = "https://#{site}/#{full_name}"
-    if path
-      "#{u}/blob/master/#{path}"
-    else
+    if path.empty?
       u
+    else
+      "#{u}/blob/master/#{path}"
     end
   end
 
