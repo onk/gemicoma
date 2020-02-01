@@ -1,0 +1,34 @@
+<h1><%= @gem_version.name %></h1>
+
+<p>current_version: <%= @gem_version.version %></p>
+
+<table class="table table-sm">
+  <thead class="thead-light">
+    <tr>
+      <th>project name</th>
+      <th>version</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @project_gem_versions.each do |pg| %>
+      <%
+        row_class_name = case pg.status
+                         when ProjectGemVersion::Status::OUTDATED then "table-danger"
+                         when ProjectGemVersion::Status::BEHIND   then "table-warning"
+                         when ProjectGemVersion::Status::LATEST   then ""
+                         when ProjectGemVersion::Status::UNKNOWN  then "table-secondary"
+                         end
+      %>
+      <tr class="<%= row_class_name %>">
+        <td>
+          <a href="/projects/<%= pg.project.id %>"><%= pg.project.full_name %> <%= pg.project.path %></a>
+        </td>
+        <td><%= pg.locked_version %></td>
+        <td>
+          <%= status_tag(pg.status) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
