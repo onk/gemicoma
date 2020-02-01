@@ -112,6 +112,14 @@ class Gemicoma < Sinatra::Base
     redirect "/projects/#{project.id}"
   end
 
+  get "/gem_versions" do
+    @project_gem_versions_idx = ProjectGemVersion.preload(:project, :gem_version).all.
+      select {|pgv| pgv.project }. # remove deleted projects
+      group_by {|pgv| pgv.gem_version }.
+      sort_by {|gv, array| -array.size } # sort by used gem
+    erb :"gem_versions/index"
+  end
+
   get "/gem_versions/:name" do
     @gem_version = GemVersion.find_by!(name: params[:name])
     @project_gem_versions = ProjectGemVersion.preload(:project).where(gem_version_id: @gem_version.id).
