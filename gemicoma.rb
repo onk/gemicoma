@@ -111,4 +111,12 @@ class Gemicoma < Sinatra::Base
     flash[:notice] = "Sync job was successfully enqueued."
     redirect "/projects/#{project.id}"
   end
+
+  get "/gem_versions/:name" do
+    @gem_version = GemVersion.find_by!(name: params[:name])
+    @project_gem_versions = ProjectGemVersion.preload(:project).where(gem_version_id: @gem_version.id).
+      to_a.sort_by {|pgv| Gem::Version.create(pgv.locked_version) }.reverse. # locked_version desc
+      select {|pgv| pgv.project } # remove deleted projects
+    erb :"gem_versions/show"
+  end
 end
