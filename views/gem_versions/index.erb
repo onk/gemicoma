@@ -8,12 +8,12 @@
     </tr>
   </thead>
   <tbody>
-    <% @project_gem_versions_idx.each do |gem_version, proect_gem_versions| %>
+    <% @project_gem_versions_idx.each do |gem_version, project_gem_versions| %>
       <tr>
         <td>
           <a href="/gem_versions/<%= gem_version.name %>"><%= gem_version.name %></a>
         </td>
-        <td><%= proect_gem_versions.size %></td>
+        <td><%= project_gem_versions.size %></td>
       </tr>
     <% end %>
   </tbody>
