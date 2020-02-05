@@ -20,9 +20,27 @@
 </head>
 <body class="d-flex flex-column">
   <header>
-    <div class="navbar navbar-dark bg-dark">
+    <div class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
         <a href="/" class="navbar-brand">gemicoma</a>
+        <% if current_user %>
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle py-0" href="#" role="button" data-toggle="dropdown">
+                <%= current_user.name %>
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="/logout">Log out</a>
+              </div>
+            </li>
+          </ul>
+        <% else %>
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a href="/auth/github" class="nav-link">Log in</a>
+            </li>
+          </ul>
+        <% end %>
       </div>
     </div>
   </header>

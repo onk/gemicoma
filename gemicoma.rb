@@ -8,6 +8,10 @@ Dir.glob("models/**/*").each { |f| require_relative f }
 Dir.glob("jobs/**/*").each { |f| require_relative f }
 
 class Gemicoma < Sinatra::Base
+  use OmniAuth::Builder do
+    provider :github, ENV["GITHUB_KEY"], ENV["GITHUB_SECRET"]
+  end
+
   set :method_override, true # POST _method hack
   set :sessions, true
   set :database_file, "config/database.yml"
@@ -136,5 +140,24 @@ class Gemicoma < Sinatra::Base
   get "/logout" do
     session.clear
     redirect "/"
+  end
+
+  # omniauth
+  get "/auth/:provider/callback" do
+    auth = request.env["omniauth.auth"]
+
+    if current_user
+      account = current_user.user_accounts.find_or_initialize_by(provider: auth.provider, uid: auth.uid)
+      account.save_auth_info(auth)
+      redirect session.delete("return_to") || "/"
+    else
+      account = UserAccount.find_or_initialize_by(provider: auth.provider, uid: auth.uid)
+      unless account.user
+        account.user = User.create!(name: auth.info.nickname)
+      end
+      account.save_auth_info(auth)
+      session[:user_id] = account.user_id
+      redirect session.delete("return_to") || "/"
+    end
   end
 end
