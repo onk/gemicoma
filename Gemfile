@@ -22,5 +22,6 @@ gem "sinatra-flash", require: ["sinatra/flash"]
 
 group :test do
   gem "database_rewinder"
+  gem "rack-test"
   gem "rspec", group: :development
 end
