@@ -89,7 +89,7 @@ class Gemicoma < Sinatra::Base
     uri = URI.parse(params[:url])
     project_params = {
       site: uri.host,
-      full_name: uri.path.sub(%r{^/}, ""),
+      full_name: uri.path.sub(%r{^/}, "").sub(%r{/$}, ""),
       path: params[:path].sub(%r{^/}, "").sub(%r{/$}, "")
     }
     Project.create!(project_params)
