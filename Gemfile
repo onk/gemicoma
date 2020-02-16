@@ -24,4 +24,5 @@ group :test do
   gem "database_rewinder"
   gem "rack-test"
   gem "rspec", group: :development
+  gem "rspec-request_describer"
 end
