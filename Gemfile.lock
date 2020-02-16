@@ -70,6 +70,7 @@ GEM
     rspec-mocks (3.9.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.9.0)
+    rspec-request_describer (0.3.2)
     rspec-support (3.9.2)
     ruby2_keywords (0.0.2)
     sawyer (0.8.2)
@@ -124,6 +125,7 @@ DEPENDENCIES
   rack-test
   rake
   rspec
+  rspec-request_describer
   sidekiq
   sidekiq-cron
   sinatra

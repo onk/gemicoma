@@ -31,4 +31,5 @@ RSpec.configure do |config|
   end
 
   config.include Rack::Test::Methods, type: :request
+  config.include RSpec::RequestDescriber, type: :request
 end
