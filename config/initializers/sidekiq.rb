@@ -1,6 +1,6 @@
 config_file = File.join(File.expand_path("..", __dir__), "redis.yml")
 env = ENV["RACK_ENV"] || "development"
-config = YAML.load(ERB.new(IO.read(config_file)).result)[env]
+config = YAML.safe_load(ERB.new(IO.read(config_file)).result, aliases: true)[env]
 redis_sidekiq = { url: "redis://#{config["host"]}:#{config["port"]}/#{config["db"]}" }
 Sidekiq.configure_server do |config|
   config.redis = redis_sidekiq
@@ -8,7 +8,7 @@ Sidekiq.configure_server do |config|
   # sidekiq-cron
   schedule_file = File.join(File.expand_path("..", __dir__), "schedule.yml")
   if File.exist?(schedule_file)
-    hash = YAML.load(ERB.new(IO.read(schedule_file)).result)
+    hash = YAML.safe_load(ERB.new(IO.read(schedule_file)).result)
     Sidekiq::Cron::Job.load_from_hash!(hash)
   end
 end
