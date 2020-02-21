@@ -132,4 +132,9 @@ class Gemicoma < Sinatra::Base
       select {|pgv| pgv.project } # remove deleted projects
     erb :"gem_versions/show"
   end
+
+  get "/logout" do
+    session.clear
+    redirect "/"
+  end
 end
