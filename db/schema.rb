@@ -44,4 +44,10 @@ ActiveRecord::Schema.define() do
     t.index ["site", "full_name", "path", "is_active"], name: "site_and_full_name_and_path_and_is_active", unique: true
   end
 
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
 end
