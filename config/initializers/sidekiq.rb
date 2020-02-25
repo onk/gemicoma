@@ -1,7 +1,6 @@
 config_file = File.join(File.expand_path("..", __dir__), "redis.yml")
 env = ENV["RACK_ENV"] || "development"
-config = YAML.safe_load(ERB.new(IO.read(config_file)).result, aliases: true)[env]
-redis_sidekiq = { url: "redis://#{config["host"]}:#{config["port"]}/#{config["db"]}" }
+redis_sidekiq = YAML.safe_load(ERB.new(IO.read(config_file)).result, aliases: true)[env]
 Sidekiq.configure_server do |config|
   config.redis = redis_sidekiq
 
