@@ -61,6 +61,10 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def advisories
+    project_gem_versions.flat_map {|pgv| pgv.advisories }
+  end
+
   private
 
     # is_active becomes null when the project is deleted.
