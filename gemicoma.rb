@@ -24,12 +24,7 @@ class Gemicoma < Sinatra::Base
     also_reload "jobs/**/*"
   end
 
-  helpers do
-    def current_user
-      return nil unless session[:user_id]
-      @current_user ||= User.find_by(id: session[:user_id])
-    end
-
+  module TagHelper
     def l(object, **kwargs)
       object.nil? ? "" : I18n.l(object, **kwargs)
     end
@@ -74,6 +69,14 @@ class Gemicoma < Sinatra::Base
       else
         site
       end
+    end
+  end
+
+  helpers do
+    include TagHelper
+    def current_user
+      return nil unless session[:user_id]
+      @current_user ||= User.find_by(id: session[:user_id])
     end
   end
 
