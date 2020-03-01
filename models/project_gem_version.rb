@@ -32,6 +32,10 @@ class ProjectGemVersion < ActiveRecord::Base
   # database.checkgem require [name: String, version: Gem::Version] object
   TempGem = Struct.new(:name, :version)
   def advisories
-    @advisories ||= ProjectGemVersion.advisory_database.check_gem(TempGem.new(gem_version.name, Gem::Version.new(locked_version))).to_a
+    @advisories ||= begin
+      ignore_advisory_ids = self.project.ignore_advisories.pluck(:advisory_id)
+      advisories = ProjectGemVersion.advisory_database.check_gem(TempGem.new(gem_version.name, Gem::Version.new(locked_version))).to_a
+      advisories.reject {|advisory| ignore_advisory_ids.include?(advisory.id) }
+    end
   end
 end
