@@ -5,6 +5,7 @@ class Project < ActiveRecord::Base
   before_recover :set_is_active_to_true
 
   has_many :project_gem_versions
+  has_many :ignore_advisories
 
   def url
     u = "https://#{site}/#{full_name}"

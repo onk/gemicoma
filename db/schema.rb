@@ -20,6 +20,14 @@ ActiveRecord::Schema.define() do
     t.index ["name"], name: "name", unique: true
   end
 
+  create_table "ignore_advisories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.string "advisory_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id", "advisory_id"], name: "project_id_and_advisory_id"
+  end
+
   create_table "project_gem_versions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
     t.bigint "project_id", null: false, unsigned: true
     t.bigint "gem_version_id", null: false, unsigned: true
