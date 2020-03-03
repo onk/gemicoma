@@ -1,0 +1,38 @@
+name: Test
+
+on: [push]
+
+jobs:
+  rspec:
+    runs-on: "ubuntu-latest"
+    strategy:
+      matrix:
+        ruby:
+          - 2.6.x
+          - 2.7.x
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v1
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: ${{ runner.os }}-gems-
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+      - name: apt-get
+        run: |
+          sudo apt-get update
+          sudo apt-get install libmysqlclient-dev
+      - name: bundle install
+        run: |
+          gem install bundler
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+      - name: setup db
+        run: |
+          cp config/database.yml.ci config/database.yml
+          bundle exec rake db:setup
+      - name: test
+        run: |
+          bundle exec rake
