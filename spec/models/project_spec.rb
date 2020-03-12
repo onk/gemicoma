@@ -1,4 +1,17 @@
 RSpec.describe Project do
+  describe "#full_name_with_path" do
+    subject { project.full_name_with_path }
+    context "path is empty" do
+      let(:project) { Project.create!(site: "github.com", full_name: "foo/bar") }
+      it { is_expected.to eq "foo/bar" }
+    end
+
+    context "path is not empty" do
+      let(:project) { Project.create!(site: "github.com", full_name: "foo/bar", path: "baz") }
+      it { is_expected.to eq "foo/bar baz" }
+    end
+  end
+
   describe "#import_project_gem_versions" do
     subject { @project.import_project_gem_versions(@dependencies, @specs) }
 
