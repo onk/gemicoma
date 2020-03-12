@@ -22,7 +22,7 @@
       %>
       <tr class="<%= row_class_name %>">
         <td>
-          <a href="/projects/<%= pg.project.id %>"><%= pg.project.full_name %> <%= pg.project.path %></a>
+          <a href="/projects/<%= pg.project.id %>"><%= pg.project.full_name_with_path %></a>
         </td>
         <td><%= pg.locked_version %></td>
         <td>

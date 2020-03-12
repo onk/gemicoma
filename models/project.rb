@@ -16,6 +16,14 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def full_name_with_path
+    if path.empty?
+      full_name
+    else
+      "#{full_name} #{path}"
+    end
+  end
+
   def import_project_gem_versions(dependencies, specs)
     dependencies_idx = dependencies.index_by(&:name)
     db_project_gem_versions_idx = project_gem_versions.preload(:gem_version).
