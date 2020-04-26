@@ -1,3 +1,4 @@
+<% content_for :title, @project.full_name_with_path %>
 <h1><a href="<%= @project.url %>"><%= site_image_tag(@project.site) %></a> <%= @project.full_name_with_path %></h1>
 
 <p>status percentage: <%= @project.status_percentage %>%</p>

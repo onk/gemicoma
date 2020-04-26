@@ -79,6 +79,7 @@ class Gemicoma < Sinatra::Base
       @current_user ||= User.find_by(id: session[:user_id])
     end
   end
+  helpers Sinatra::ContentFor
 
   get "/" do
     @projects = Project.preload(:project_gem_versions => :gem_version).all.sort_by {|proj|
