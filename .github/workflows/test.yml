@@ -31,6 +31,7 @@ jobs:
           bundle install --jobs 4 --retry 3
       - name: setup db
         run: |
+          sudo service mysql start
           cp config/database.yml.ci config/database.yml
           bundle exec rake db:setup
       - name: test
