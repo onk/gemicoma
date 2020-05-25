@@ -17,4 +17,19 @@ RSpec.describe "Projects", type: :request do
       expect(project.path).to eq ""
     }
   end
+
+  describe "GET /projects/:id" do
+    context "when project exists" do
+      let(:id) { @project.id }
+      before {
+        @project = Project.create!(site: "github.com", full_name: "foo/bar")
+      }
+      it { is_expected.to eq 200 }
+    end
+
+    context "when project not exists" do
+      let(:id) { 99999999 }
+      it { is_expected.to eq 404 }
+    end
+  end
 end

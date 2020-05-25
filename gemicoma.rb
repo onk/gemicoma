@@ -24,6 +24,10 @@ class Gemicoma < Sinatra::Base
     also_reload "jobs/**/*"
   end
 
+  error ActiveRecord::RecordNotFound do |e|
+    not_found
+  end
+
   module TagHelper
     def l(object, **kwargs)
       object.nil? ? "" : I18n.l(object, **kwargs)
