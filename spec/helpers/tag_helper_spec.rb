@@ -26,6 +26,7 @@ RSpec.describe Gemicoma::TagHelper do
         nil,                   # date
         nil,                   # description
         nil,                   # cvss_v2
+        nil,                   # cvss_v3
         "2020-XXXX",           # cve
       )
     }
