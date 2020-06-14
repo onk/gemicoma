@@ -15,6 +15,7 @@ gem "octokit"
 gem "omniauth"
 gem "omniauth-github"
 gem "rake"
+gem "redis", "< 4.2" # wait for sidekiq v6.1 and sidekiq-cron
 gem "sidekiq"
 gem "sidekiq-cron"
 gem "sinatra", require: false
