@@ -24,6 +24,10 @@ class GemVersion < ActiveRecord::Base
         gem_versions << gem_version.attributes
       end
     end
-    GemVersion.upsert_all(gem_versions)
+
+    until gem_versions.empty?
+      r = gem_versions.slice!(0, 1000)
+      GemVersion.upsert_all(r)
+    end
   end
 end
