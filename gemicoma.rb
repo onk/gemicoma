@@ -38,9 +38,8 @@ class Gemicoma < Sinatra::Base
                       advisory.cve_id
                     elsif advisory.osvdb
                       advisory.osvdb_id
-                    # TODO: bundler-audit pull/217
-                    # elsif advisory.ghsa
-                    #   advisory.ghsa_id
+                    elsif advisory.ghsa
+                      advisory.ghsa_id
                     end
       title = if advisory_id
                 "#{advisory_id}: #{advisory.title}"
