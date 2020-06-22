@@ -30,10 +30,13 @@ jobs:
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
       - name: setup db
+        env:
+          MYSQL_PASS: "root"
         run: |
           sudo service mysql start
-          cp config/database.yml.ci config/database.yml
           bundle exec rake db:setup
       - name: test
+        env:
+          MYSQL_PASS: "root"
         run: |
           bundle exec rake
