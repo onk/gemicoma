@@ -1,5 +1,5 @@
 require "bundler"
-Bundler.require(:default, ENV["RACK_ENV"] || "development")
+Bundler.require(:default, ENV["APP_ENV"] || "development")
 
 # initializers
 Dir.glob("config/initializers/*").each { |f| require_relative f }

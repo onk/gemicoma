@@ -1,4 +1,4 @@
-ENV["RACK_ENV"] ||= "test"
+ENV["APP_ENV"] ||= "test"
 Bundler.require(:default, "test")
 # load sinatra app
 require_relative "../gemicoma"
