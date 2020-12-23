@@ -1,22 +1,22 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    activemodel (6.0.3.4)
-      activesupport (= 6.0.3.4)
-    activerecord (6.0.3.4)
-      activemodel (= 6.0.3.4)
-      activesupport (= 6.0.3.4)
+    activemodel (6.1.0)
+      activesupport (= 6.1.0)
+    activerecord (6.1.0)
+      activemodel (= 6.1.0)
+      activesupport (= 6.1.0)
     activerecord-quiet_schema_version (0.2.0)
       activerecord
     activerecord-simple_index_name (1.0.0)
       activerecord (>= 5.0.0)
       activesupport (>= 5.0.0)
-    activesupport (6.0.3.4)
+    activesupport (6.1.0)
       concurrent-ruby (~> 1.0, >= 1.0.2)
-      i18n (>= 0.7, < 2)
-      minitest (~> 5.1)
-      tzinfo (~> 1.1)
-      zeitwerk (~> 2.2, >= 2.2.2)
+      i18n (>= 1.6, < 2)
+      minitest (>= 5.1)
+      tzinfo (~> 2.0)
+      zeitwerk (~> 2.3)
     acts_as_paranoid (0.7.0)
       activerecord (>= 5.2, < 7.0)
       activesupport (>= 5.2, < 7.0)
@@ -31,10 +31,10 @@ GEM
     diff-lcs (1.4.4)
     et-orbi (1.2.4)
       tzinfo
-    faraday (1.1.0)
+    faraday (1.2.0)
       multipart-post (>= 1.2, < 3)
       ruby2_keywords
-    fugit (1.4.0)
+    fugit (1.4.1)
       et-orbi (~> 1.1, >= 1.1.8)
       raabro (~> 1.4)
     gemnasium-parser (0.1.9)
@@ -42,7 +42,7 @@ GEM
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     jwt (2.2.2)
-    minitest (5.14.2)
+    minitest (5.12.0)
     multi_json (1.15.0)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
@@ -74,7 +74,7 @@ GEM
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
-    rake (13.0.1)
+    rake (13.0.3)
     redis (4.1.4)
     rspec (3.10.0)
       rspec-core (~> 3.10.0)
@@ -119,14 +119,13 @@ GEM
     sinatra-flash (0.3.0)
       sinatra (>= 1.0.0)
     thor (1.0.1)
-    thread_safe (0.3.6)
     tilt (2.0.10)
-    tzinfo (1.2.7)
-      thread_safe (~> 0.1)
-    zeitwerk (2.4.1)
+    tzinfo (2.0.4)
+      concurrent-ruby (~> 1.0)
+    zeitwerk (2.4.2)
 
 PLATFORMS
-  ruby
+  x86_64-darwin-20
 
 DEPENDENCIES
   activerecord
@@ -154,4 +153,4 @@ DEPENDENCIES
   sinatra-flash
 
 BUNDLED WITH
-   2.2.0.rc.2
+   2.2.3
