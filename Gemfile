@@ -24,7 +24,8 @@ gem "sinatra-contrib"
 gem "sinatra-flash", require: ["sinatra/flash"]
 
 group :test do
-  gem "database_rewinder"
+  # https://github.com/amatsuda/database_rewinder/pull/74
+  gem "database_rewinder", github: "takkanm/database_rewinder", branch: "fix-error-on-edge-rails"
   gem "rack-test"
   gem "rspec", group: :development
   gem "rspec-request_describer"

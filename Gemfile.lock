@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/takkanm/database_rewinder
+  revision: 2c29d36b17e927d00cbd5ef75425bb520d223b04
+  branch: fix-error-on-edge-rails
+  specs:
+    database_rewinder (0.9.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -27,7 +34,6 @@ GEM
       thor (>= 0.18, < 2)
     concurrent-ruby (1.1.7)
     connection_pool (2.2.3)
-    database_rewinder (0.9.4)
     diff-lcs (1.4.4)
     et-orbi (1.2.4)
       tzinfo
@@ -133,7 +139,7 @@ DEPENDENCIES
   activerecord-simple_index_name
   acts_as_paranoid
   bundler-audit
-  database_rewinder
+  database_rewinder!
   gemnasium-parser
   i18n
   mysql2
