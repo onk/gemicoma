@@ -9,6 +9,10 @@ Dir.glob("jobs/**/*").each { |f| require_relative f }
 
 class Gemicoma < Sinatra::Base
   use OmniAuth::Builder do
+    configure do |config|
+      config.allowed_request_methods = %i[get post]
+      config.silence_get_warning = true
+    end
     provider :github, ENV["GITHUB_KEY"], ENV["GITHUB_SECRET"]
   end
 
