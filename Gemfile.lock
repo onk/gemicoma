@@ -1,7 +1,7 @@
 GIT
-  remote: https://github.com/takkanm/database_rewinder
-  revision: 2c29d36b17e927d00cbd5ef75425bb520d223b04
-  branch: fix-error-on-edge-rails
+  remote: https://github.com/r7kamura/database_rewinder
+  revision: 5900cb505ae7c4cb545185a60517e0c5c0fa5809
+  branch: feature/rails-6-1
   specs:
     database_rewinder (0.9.4)
 
