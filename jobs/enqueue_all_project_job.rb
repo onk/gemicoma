@@ -1,5 +1,5 @@
-class EnqueueAllProjectJob
-  include Sidekiq::Worker
+class EnqueueAllProjectJob < ApplicationJob
+  queue_as :default
 
   def perform
     Project.all.find_each do |project|

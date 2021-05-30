@@ -1,7 +1,7 @@
 require "rubygems/remote_fetcher"
 
-class FetchLatestGemVersionsJob
-  include Sidekiq::Worker
+class FetchLatestGemVersionsJob < ApplicationJob
+  queue_as :default
 
   def perform(args = {})
     source = URI.parse("https://rubygems.org/")

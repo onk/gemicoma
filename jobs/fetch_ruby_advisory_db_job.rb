@@ -1,5 +1,5 @@
-class FetchRubyAdvisoryDbJob
-  include Sidekiq::Worker
+class FetchRubyAdvisoryDbJob < ApplicationJob
+  queue_as :default
 
   # fetch ruby-advisory-db into tmp/ruby-advisory-db
   def perform(args = {})
