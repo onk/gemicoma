@@ -1,5 +1,5 @@
-class FetchProjectGemVersionsJob
-  include Sidekiq::Worker
+class FetchProjectGemVersionsJob < ApplicationJob
+  queue_as :default
 
   def perform(args = {})
     args = args.with_indifferent_access
