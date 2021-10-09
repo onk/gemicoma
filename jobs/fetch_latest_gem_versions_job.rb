@@ -1,5 +1,5 @@
 require "rubygems/remote_fetcher"
-
+require_relative "application_job"
 class FetchLatestGemVersionsJob < ApplicationJob
   queue_as :default
 

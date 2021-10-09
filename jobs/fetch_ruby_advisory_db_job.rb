@@ -1,3 +1,4 @@
+require_relative "application_job"
 class FetchRubyAdvisoryDbJob < ApplicationJob
   queue_as :default
 
