@@ -1,3 +1,4 @@
+require_relative "application_job"
 class EnqueueAllProjectJob < ApplicationJob
   queue_as :default
 
