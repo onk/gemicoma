@@ -22,12 +22,15 @@ RSpec.configure do |config|
   config.order = :random
   Kernel.srand config.seed
 
+  ApplicationJob.queue_adapter = :test
+
   config.before(:suite) do
     DatabaseRewinder.clean_all
   end
 
   config.after(:each) do
     DatabaseRewinder.clean
+    ApplicationJob.queue_adapter.enqueued_jobs.clear
   end
 
   config.include Rack::Test::Methods, type: :request
