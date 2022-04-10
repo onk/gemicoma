@@ -32,4 +32,17 @@ RSpec.describe "Projects", type: :request do
       it { is_expected.to eq 404 }
     end
   end
+
+  describe "POST /projects/:id/sync" do
+    let(:id) { @project.id }
+    before {
+      @project = Project.create!(site: "github.com", full_name: "foo/bar")
+    }
+
+    it {
+      is_expected.to eq 302
+      # have_enqueued
+      expect(ApplicationJob.queue_adapter.enqueued_jobs.count).to eq 1
+    }
+  end
 end
