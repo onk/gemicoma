@@ -127,7 +127,7 @@ class Gemicoma < Sinatra::Base
 
   post "/projects/:id/sync" do
     project = Project.find(params[:id])
-    FetchProjectGemVersionsJob.perform_async(project_id: project.id)
+    FetchProjectGemVersionsJob.perform_later(project_id: project.id)
     flash[:notice] = "Sync job was successfully enqueued."
     redirect "/projects/#{project.id}"
   end
