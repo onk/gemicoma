@@ -9,7 +9,7 @@ services:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_ROOT_HOST: "172.%"
   redis:
-    image: "redis:6.2-alpine"
+    image: "redis:8.4-alpine"
     ports:
       - "6379:6379"
     volumes:
