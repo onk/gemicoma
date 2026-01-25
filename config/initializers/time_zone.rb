@@ -7,4 +7,3 @@ zone_name = ENV["TZ"] || begin
 end
 Time.zone_default = Time.find_zone!(zone_name)
 ActiveRecord::Base.time_zone_aware_attributes = true
-ActiveRecord::Base.default_timezone = :utc
