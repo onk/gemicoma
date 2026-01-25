@@ -10,8 +10,6 @@ GEM
       activemodel (= 8.1.2)
       activesupport (= 8.1.2)
       timeout (>= 0.4.0)
-    activerecord-quiet_schema_version (0.2.0)
-      activerecord
     activerecord-simple_index_name (1.1.2)
       activerecord (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -190,7 +188,6 @@ PLATFORMS
 DEPENDENCIES
   activejob
   activerecord
-  activerecord-quiet_schema_version
   activerecord-simple_index_name
   acts_as_paranoid
   bundler-audit
@@ -219,7 +216,6 @@ CHECKSUMS
   activejob (8.1.2) sha256=908dab3713b101859536375819f4156b07bdf4c232cc645e7538adb9e302f825
   activemodel (8.1.2) sha256=e21358c11ce68aed3f9838b7e464977bc007b4446c6e4059781e1d5c03bcf33e
   activerecord (8.1.2) sha256=acfbe0cadfcc50fa208011fe6f4eb01cae682ebae0ef57145ba45380c74bcc44
-  activerecord-quiet_schema_version (0.2.0) sha256=372567592010119029e8e121875d2b2405d74997267c688ef84ef190f2c45aaa
   activerecord-simple_index_name (1.1.2) sha256=dabbd3a25580ede8d7cd7a00ebc6ae185c6b5793b62c14ed10beead91c27da0d
   activesupport (8.1.2) sha256=88842578ccd0d40f658289b0e8c842acfe9af751afee2e0744a7873f50b6fdae
   acts_as_paranoid (0.11.0) sha256=8fae9e408f739d8ad840b02dde18beb364a897f6b57ee25ef1c52efa8bc906db

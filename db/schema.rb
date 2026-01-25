@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define() do
+ActiveRecord::Schema[8.1].define(version: 2020_03_01_141135) do
   create_table "gem_versions", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name", null: false
