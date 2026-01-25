@@ -6,7 +6,8 @@ class FetchLatestGemVersionsJob < ApplicationJob
   def perform(args = {})
     source = URI.parse("https://rubygems.org/")
     remote = Bundler::Source::Rubygems::Remote.new(source)
-    specs = Bundler.rubygems.fetch_specs(remote, "specs")
+    fetcher = Bundler::Fetcher.new(remote)
+    specs = Bundler.rubygems.fetch_specs(remote, "specs", fetcher.gem_remote_fetcher)
     GemVersion.import_specs(specs)
   end
 end
