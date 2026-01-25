@@ -34,15 +34,13 @@ jobs:
           - 3.0.0
     steps:
       - uses: actions/checkout@v6
+      - name: Install MySQL client
+        run: sudo apt-get update && sudo apt-get install -y libmysqlclient-dev
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler: latest
           bundler-cache: true
-      - name: apt-get
-        run: |
-          sudo apt-get update
-          sudo apt-get install libmysqlclient-dev
       - name: setup db
         env:
           MYSQL_PASS: "root"
