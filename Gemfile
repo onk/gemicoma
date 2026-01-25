@@ -10,7 +10,6 @@ gem "acts_as_paranoid"
 gem "bundler-audit"
 gem "gemnasium-parser"
 gem "i18n"
-gem "mysql2"
 gem "octokit"
 gem "omniauth"
 gem "omniauth-github"
@@ -24,6 +23,7 @@ gem "sinatra", require: false
 gem "sinatra-activerecord"
 gem "sinatra-contrib"
 gem "sinatra-flash", require: ["sinatra/flash"]
+gem "trilogy"
 
 group :test do
   gem "database_rewinder"
